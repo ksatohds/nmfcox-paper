@@ -24,13 +24,13 @@ draw <- function(){
   # 上段 NMF-COX（Q=2,3,4 の学習非負基底; K→Q 直接）
   for(l in acov){
     plot(NA,xlim=range(et),ylim=ysh[[l]],xlab="event time",ylab=expression(beta[l](t)~"(per-SD log-HR)"),
-         main=sprintf("NMF-COX: %s", l)); abline(h=0,lty=3,col="gray70")
+         main=sprintf("(NMF-COX) %s", l)); abline(h=0,lty=3,col="gray70")
     for(q in Qs){ k<-as.character(q); lines(et, bN[[k]][,l], col=rcol[k], lty=rlty[k], lwd=rlwd[k]) }
     if(l==acov[1]) legend("topleft", sprintf("Q=%d",Qs), col=rcol, lty=rlty, lwd=rlwd, bty="n", cex=.85, seg.len=4) }
   # 下段 RRR（固定辞書 M=Mdim → 縮約ランク r=2,3,4; K→M→r）
   for(l in acov){
     plot(NA,xlim=range(et),ylim=ysh[[l]],xlab="event time",ylab=expression(beta[l](t)~"(per-SD log-HR)"),
-         main=sprintf("RRR (M=%d anch.): %s", Mdim, l)); abline(h=0,lty=3,col="gray70")
+         main=sprintf("(RRR, M=%d anch.) %s", Mdim, l)); abline(h=0,lty=3,col="gray70")
     for(r in rok){ k<-as.character(r); lines(et, bR[[k]][l,], col=rcol[k], lty=rlty[k], lwd=rlwd[k]) }
     if(l==acov[1]) legend("topleft", sprintf("r=%d",rok), col=rcol, lty=rlty, lwd=rlwd, bty="n", cex=.85, seg.len=4) }
 }

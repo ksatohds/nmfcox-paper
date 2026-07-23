@@ -32,7 +32,7 @@ draw <- function(){
     HR<-sapply(z, function(zz) exp(zz*r$beta.t[,l]))
     matplot(et, HR, type="l", lty=1, lwd=2.2, col=ramp, log="y", xlim=xr(et),
             xlab="event time", ylab=sprintf("HR(t) vs mean patient [%s]",l),
-            main=sprintf("mgus2: time-varying HR by %s",l))
+            main=sprintf("(mgus2) time-varying HR by %s",l))
     abline(h=1, lty=3, col="gray55")
     rlab(et, HR, sprintf("%.2f(p%d)", vals, as.integer(qs*100))) }
 }
