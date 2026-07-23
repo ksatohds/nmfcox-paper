@@ -25,7 +25,7 @@ remotes::install_github("ksatohds/nmfkc@develop")   # 8/15 頃 CRAN 公開予定
 
 - **① シミュレーションの「偽イベント」修正**：DGP が `Tt<-ifelse(crossed,grid[idx],TAU); status<-as.integer(Tt<=Cc)` のため、**イベント未発生（`Tt=TAU`）かつ行政打切り（`Cc=TAU`）の例がイベントに計上**されていた（実測 平均 4.25 偽イベント/300）。修正は `Tt<-ifelse(crossed,grid[idx+1],Inf)`。該当は **`mc_cf_oracle` / `mc_overrank_R2` / `verify_newton_alldata`** の3本 → 本日付 **`*_20260724.R`** に差し替え（`mc_beta` と `mc_conf` は元から修正済みで影響なし）。→ **tab:mcsim** と **tab:newton の sim 行**を 500反復で再実行。
 - **② 交絡シミュを同定可能な `Q=1` に**：`mc_conf` は非PH共変量 **R=1** に対し作業ランク **Q=2**（＝論文が非同定とする `Q>R`）だった → **`verification/mc_conf_20260724.R`（rank=1）** に差し替え、出力 **`mc_conf_conf724.rds`**（タグ `*_Q1`）。**fig:confound** は **`generate_confound_fig_20260724.R`** で再描画。結論は保存（max\|bias\| 0.0141、NMF/tvc coverage 0.90–0.95、full-PH 0.936→0.872）。
-- **③ ランク選択の反復数**：本文 caption の「150反復（AIC/BIC）」に対し保存 rds は実際 60反復だったため、**150反復で再実行**（`mc_select_R3_20260713.R` を `R=150`、`crit=aic`/`bic`）。
+- **③ ランク選択の反復数（完了）**：本文 caption の「150反復（AIC/BIC）」に対し保存 rds は実際 60反復だったため、**150反復で再実行**（`mc_select_R3_20260713.R` を `R=150`、`crit=aic`/`bic`）。出力 **`mc_selR3_aic724.rds`**・**`mc_selR3_bic724b.rds`** を同梱。結果：AIC rank1 0.77/0.15/0.08・rank2 0.20/0.62/0.18、BIC rank1 1.00/0.00/0.00・rank2 0.99/0.01/0.00、median λ_X=1000。
 - **④ 図タイトル様式の統一**：パネル主タイトルを **「先頭に丸かっこタグ `(…)` ＋説明」**へ一本化（コロン様式を廃止）。`generate_mgus2hr_20260714.R`・`generate_mono_figs_20260712.R`（`mgus2:` → `(mgus2)`）、`generate_rank_compare_gbsg_mono_20260714.R`（`NMF-COX:` → `(NMF-COX)`、`RRR (M=5 anch.):` → `(RRR, M=5 anch.)`）を更新。**Fig 1 は全フォント2倍**＝**`generate_convergence_fig_20260724.R`**（旧 `..._20260714r2.R`）。
 - **⑤ 集計スクリプト**：**`verification/aggregate_mc_20260724.R`**（tab:mcsim の bias/coverage/oracle差と、fig:confound/§3.1 の bias・coverage を再計算）。
 
