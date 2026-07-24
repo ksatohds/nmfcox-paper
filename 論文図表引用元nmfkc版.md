@@ -29,6 +29,8 @@ remotes::install_github("ksatohds/nmfkc@develop")   # 8/15 頃 CRAN 公開予定
 - **④ 図タイトル様式の統一**：パネル主タイトルを **「先頭に丸かっこタグ `(…)` ＋説明」**へ一本化（コロン様式を廃止）。`generate_mgus2hr_20260714.R`・`generate_mono_figs_20260712.R`（`mgus2:` → `(mgus2)`）、`generate_rank_compare_gbsg_mono_20260714.R`（`NMF-COX:` → `(NMF-COX)`、`RRR (M=5 anch.):` → `(RRR, M=5 anch.)`）を更新。**Fig 1 は全フォント2倍**＝**`generate_convergence_fig_20260724.R`**（旧 `..._20260714r2.R`）。
 - **⑤ 集計スクリプト**：**`verification/aggregate_mc_20260724.R`**（tab:mcsim の bias/coverage/oracle差と、fig:confound/§3.1 の bias・coverage を再計算）。
 
+- **⑥ 最終監査に伴う追加実験**：`verification/mc_beta_rate_20260724.R`（λ_X ∝ N⁻¹ でレート実測 → `mc_beta_rate724.rds`）、`verification/mc_underrank_20260724.R`（真ランク2 を Q=1/Q=2 で比較、2台分割 → `mc_underrank_ur724a/b.rds`）、`verification/audit_sensitivity_20260724.R`（cox.zph 分割感度＋リスク集合内相関）を追加。
+
 > 下表のうち、**convergence / confound / tab:mcsim / tab:newton / tab:select** は上記の新スクリプト・新 rds が正典です（旧版も履歴として残置）。
 
 ## 図（Figures）
