@@ -48,18 +48,21 @@ Figures write to `v3_fig/`. Pre-computed Monte-Carlo results and multi-start fit
 
 | File | Paper element | Description |
 |------|---------------|-------------|
-| `generate_convergence_fig_20260714r2.R` | Fig `convergence` | Objective-function convergence (`nmf.cox`, veteran/gbsg/mgus2) |
+| `generate_convergence_fig_20260724.R` **(canonical)** | Fig `convergence` | Objective-function convergence (`nmf.cox`, veteran/gbsg/mgus2). Supersedes `..._20260714r2.R` (fonts, panel titles). |
 | `verification/mc_beta_20260712.R` → `generate_beta_sim_20260713B.R` | Fig `betasim`, Table `betasim` | β̂ simulation MC (500 reps) + redraw |
-| `generate_confound_fig_20260714.R` | Fig `confound` | Confounding simulation forest (self-contained: redraw or regenerate) |
+| `generate_confound_fig_20260724.R` **(canonical)** | Fig `confound` | Confounding forest, redrawn from the identified `Q=1` run `mc_conf_conf724.rds`. Supersedes `..._20260714.R`, which reads the retracted `Q=2` result `mc_conf_conf500B58.rds` (kept only as history). |
 | `generate_reassigned_basis_beta_20260714.R` → `generate_mono_figs_20260712.R` → `make_pdf_figs_20260712.R` | Fig `v3basis` | Shared non-negative basis *X* + β(t) of non-PH covariates |
 | `generate_mgus2hr_20260714.R` | Fig `mgus2hr` | mgus2 value-specific hazard ratios |
 | `generate_mono_figs_20260712.R` | Fig `dummyhr` | Dummy-covariate HR panel (mono) |
 | `compare_rrr_basis_count_20260714.R` → `regen_rrrfit_fig_20260714.R` | Fig `rrrfit` | NMF-COX vs RRR by basis count *(needs coxvc)* |
 | `generate_gamma_table_20260714.R` → `generate_gamma_forest_20260714.R` | Fig `gamma` | Cross-fit γ̂ forest (γ preserved vs full-PH Cox) |
 | `generate_rank_compare_gbsg_20260713r3.R` → `generate_rank_compare_gbsg_mono_20260714.R` | Fig `rankcmp` | Rank comparison on gbsg, NMF-COX vs RRR *(needs coxvc)* |
-| `verification/mc_cf_oracle_20260712.R`, `verification/mc_overrank_R2_20260714.R` | Table `mcsim` | Cross-fit oracle MC (baseline + over-rank rows) |
-| `verification/mc_select_R3_20260713.R` | Table `select` | Rank / λ_X selection MC (AIC/BIC/CVPL) |
-| `verification/verify_newton_alldata_20260714.R` | Table `newton` | Block-Newton solver robustness across 7 datasets |
+| `verification/mc_cf_oracle_20260724.R`, `verification/mc_overrank_R2_20260724.R` **(canonical)** | Table `mcsim` | Cross-fit oracle MC (baseline + over-rank rows). The `_20260712`/`_20260714` versions contain the fake-event DGP bug and are kept only as history. |
+| `verification/mc_select_R3_20260713.R` | Table `select` | Rank / λ_X selection MC. Canonical results: `mc_selR3_aic724.rds`, `mc_selR3_bic724b.rds` (150 reps) and `mc_selR3_selB_cvpl57v2.rds` (30 reps). |
+| `verification/verify_newton_alldata_20260724.R` **(canonical)** | Table `newton` | Block-Newton solver robustness across 7 datasets. Supersedes `..._20260714.R` (fake-event DGP fix in the `sim` row). |
+| `verification/mc_beta_rate_20260724.R` | §theory (Remark on scope) | Nuisance-rate probe: shrinks λ_X as N⁻¹ to test the `o_p(N^{-1/4})` condition |
+| `verification/mc_underrank_20260724.R` | §select (under-rank) | True rank 2 fitted at Q=1 vs Q=2 (500 reps, split over two servers) |
+| `verification/audit_sensitivity_20260724.R` | §illus, §sim | cox.zph split sensitivity (time transform) and within-risk-set |Cor(z,a)| vs β_A |
 | `verification/cvpl_mgus2_allcc_20260714.R` | §illustration | CVPL selection of λ_X on mgus2 (all complete cases) |
 | `nmf_cox2.R` | — | Frozen v2 reference implementation (used only for the cox2 column of Table `newton`) |
 | `PORTING_RECIPE.md` | — | How the `nmf_cox3.R` scripts map to `nmfkc` |
